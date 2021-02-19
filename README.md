@@ -8,7 +8,7 @@ The site uses Slim framework as a backend and Nuxt, VueJS and BootstrapVue on th
 Based on the skeleton code provided, please make the following modifications:
 
 * Implement a Vuex store. You will use this to store data such as login.
-
+- [working on it]
 * The submit form must validate against the list of members. Unlike a real-world application we
 won't be checking passwords, but we will want to make sure the customer exists. User data is
 found at the uri: http://localhost:8080/users
