@@ -8,7 +8,7 @@ The site uses Slim framework as a backend and Nuxt, VueJS and BootstrapVue on th
 Based on the skeleton code provided, please make the following modifications:
 
 * Implement a Vuex store. You will use this to store data such as login.
-- [working on it]
+- [done]
 * The submit form must validate against the list of members. Unlike a real-world application we
 won't be checking passwords, but we will want to make sure the customer exists. User data is
 found at the uri: http://localhost:8080/users
@@ -27,6 +27,7 @@ I should get automatically redirected to the login page)
     - Display the message 'Sorry, that username is not found' if the person does not exist. Otherwise
     log them in and direct them to http://localhost:3000/videos
 
+- [done]
 * Copying the patterns used to create the Users, create a video library resource on this RESTful
 api. The video endpoint should return this JSON:
 ```json

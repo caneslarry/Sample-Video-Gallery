@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Tests\Infrastructure\Persistence\User;
 
 use App\Domain\User\User;
-use App\Domain\User\UserNotFoundException;
+use App\Domain\User\VideoNotFoundException;
 use App\Infrastructure\Persistence\User\InMemoryUserRepository;
 use Tests\TestCase;
 
@@ -46,7 +46,7 @@ class InMemoryUserRepositoryTest extends TestCase
     public function testFindUserOfIdThrowsNotFoundException()
     {
         $userRepository = new InMemoryUserRepository([]);
-        $this->expectException(UserNotFoundException::class);
+        $this->expectException(VideoNotFoundException::class);
         $userRepository->findUserOfId(1);
     }
 }

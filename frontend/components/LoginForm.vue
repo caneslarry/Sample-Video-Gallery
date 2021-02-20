@@ -2,20 +2,20 @@
   <div class="container">
     <div>
       <b-card>
-        Welcome To Our Video Library, Please Log In
+        aaaasWelcome To Our Video Library, Please Log In
 
         <b-form @submit="onSubmit">
           <b-form-group
             id="input-group-1"
-            label="Email address:"
+            label="Username:"
             label-for="input-1"
           >
             <b-form-input
               id="input-1"
-              v-model="form.email"
-              type="email"
+              v-model="form.username"
+              type="username"
               required
-              placeholder="Enter email"
+              placeholder="Enter username"
             ></b-form-input>
           </b-form-group>
           <b-button type="submit" variant="primary">Submit</b-button>
@@ -24,7 +24,6 @@
     </div>
   </div>
 </template>
-
 <script>
 export default {
   data() {
@@ -36,7 +35,13 @@ export default {
   },
   methods: {
     onSubmit(){
-      console.log('A form was submitted');
+      //console.log('A form was submitted');
+      const nations = this.http.get<Nation[]>( 'assets/data.json' )
+        .pipe()
+        .subscribe( (nations:Nation[]) => {
+          this.nations = nations ? nations : [];
+          this.changeDetectorRef.detectChanges();
+        } );
     },
   }
 }
