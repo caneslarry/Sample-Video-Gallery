@@ -2,46 +2,65 @@
   <div class="container">
     <div>
       <b-card>
-        aaaasWelcome To Our Video Library, Please Log In
+        Welcome To Our Video Library, Please Log In
 
-        <b-form @submit="onSubmit">
+        <b-form>
           <b-form-group
             id="input-group-1"
             label="Username:"
             label-for="input-1"
           >
             <b-form-input
-              id="input-1"
+              id="username"
               v-model="form.username"
-              type="username"
+              type="text"
               required
               placeholder="Enter username"
             ></b-form-input>
+            <div id="username-live-feedback" class="invalid-feedback">The username does not exist. Really we cannot find it.</div>
           </b-form-group>
-          <b-button type="submit" variant="primary">Submit</b-button>
+          <b-button v-on:click.prevent="onSubmit" type="submit" variant="primary">Login to View Videos</b-button>
         </b-form>
       </b-card>
     </div>
   </div>
 </template>
 <script>
+//import { Component } from '@angular/core';
+//import { User } from './user.ts';
+//import { HttpClient } from '@angular/common/http';
+import axios from 'axios';
 export default {
+  name: "LoginForm",
+
   data() {
     return {
       form: {
-        email: ''
+        username: ''
       },
     };
   },
+  created () {},
   methods: {
     onSubmit(){
-      //console.log('A form was submitted');
-      const nations = this.http.get<Nation[]>( 'assets/data.json' )
-        .pipe()
-        .subscribe( (nations:Nation[]) => {
-          this.nations = nations ? nations : [];
-          this.changeDetectorRef.detectChanges();
-        } );
+      axios.get('http://localhost:8080/users')
+        .then((response) => {
+          var userExists = false;
+          for(var i = 0; i < response.data.data.length; i++){
+            if(response.data.data[i].username === this.form.username){
+              userExists = true;
+              break;
+            }
+          }
+        if(userExists){
+          //Take to videos
+          this.$router.push('videos');
+        }else{
+          //Show message
+          var element = document.getElementById("username");
+          element.classList.add("is-invalid");
+        }
+        });
     },
   }
 }

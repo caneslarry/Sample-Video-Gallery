@@ -13,11 +13,14 @@
     "test": "jest"
   },
   "dependencies": {
+    "@angular/core": "^11.2.1",
+    "axios": "^0.21.1",
     "bootstrap": "^4.5.0",
     "bootstrap-vue": "^2.15.0",
     "nuxt": "^2.13.0"
   },
   "devDependencies": {
+    "@angular/common": "^11.2.1",
     "@nuxtjs/eslint-config": "^3.0.0",
     "@nuxtjs/eslint-module": "^2.0.0",
     "@vue/test-utils": "^1.0.3",

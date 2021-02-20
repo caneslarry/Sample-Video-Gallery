@@ -1,36 +1,68 @@
 <template>
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col">
-        <h1>ddddWelcome to Our Video Library</h1>
+  <div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col">
+          <h1>ddddWelcome to Our Video Library</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <b-list-group v-for="video in videos" :key="video.video_id">
+            <b-list-group-item v-on:click="showVideo(video.id)"> {{ video.title }}</b-list-group-item>
+          </b-list-group>
+        </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col">
-        <b-list-group>
-          <b-list-group-item>Cras justo odio</b-list-group-item>
-          <b-list-group-item>Dapibus ac facilisis in</b-list-group-item>
-          <b-list-group-item>Morbi leo risus</b-list-group-item>
-          <b-list-group-item>Porta ac consectetur ac</b-list-group-item>
-          <b-list-group-item>Vestibulum at eros</b-list-group-item>
-        </b-list-group>
-      </div>
-    </div>
+    <VideoSummary
+      v-if="isSelected"
+      :video_id="currentVideo.video_id"
+      :title="currentVideo.title"
+      :description="currentVideo.description"
+    ></VideoSummary>
+
   </div>
 </template>
 
 <script>
+import axios from 'axios';
+import VideoSummary from '../../components/VideoSummary.vue';
+
 export default {
+  name: "VideoList",
   data() {
+    var isSelected = false;
     return {
-      form: {
-        email: ''
-      },
+      videos: [],
+      currentVideo: [],
+      isSelected
     };
+  },
+  created () {
+    // Get list of videos
+    axios.get('http://localhost:8080/videos')
+      .then((response) => {
+        this.videos = response.data.data;
+      });
+  },
+  components: {
+    'current-video-summary':VideoSummary
   },
   methods: {
     onSubmit(){
       console.log('A form was submitted');
+    },
+    showVideo(id){
+      alert(id);
+      this.currentVideo = ["title","Hello world"];
+      // Get list of videos
+      axios.get('http://localhost:8080/videos/'+id)
+        .then((response) => {
+          this.currentVideo = response.data.data;
+          console.log(response);
+          this.isSelected = true;
+
+        });
     },
   }
 }
