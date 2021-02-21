@@ -3,7 +3,6 @@
     <div>
       <b-card>
         Welcome To Our Video Library, Please Log In
-
         <b-form>
           <b-form-group
             id="input-group-1"
@@ -16,10 +15,11 @@
               type="text"
               required
               placeholder="Enter username"
+              v-on:keyup="validateUsername()"
             ></b-form-input>
             <div id="username-live-feedback" class="invalid-feedback">Sorry, that username is not found.</div>
           </b-form-group>
-          <b-button v-on:click.prevent="onSubmit" type="submit" variant="primary">Login to View Videos</b-button>
+          <b-button v-on:click.prevent="onSubmit" type="submit" variant="primary" disabled>Login to View Videos</b-button>
         </b-form>
       </b-card>
     </div>
@@ -42,6 +42,13 @@ export default {
   },
   created () {},
   methods: {
+    validateUsername() {
+      if(this.form.username.length > 3){
+
+      }
+
+    },
+
     onSubmit(){
       axios.get('http://localhost:8080/users')
         .then((response) => {
@@ -104,5 +111,17 @@ export default {
 
 .links {
   padding-top: 15px;
+}
+.btn-primary{
+  background-color: #042E24;
+  border-color: #042E24;
+}
+.btn-primary:hover{
+  background-color: #042E24;
+  border-color: #042E24;
+}
+.btn-primary.disabled, .btn-primary:disabled{
+  background-color: #042E24;
+  border-color: #042E24;
 }
 </style>

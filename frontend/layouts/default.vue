@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="app">
     <b-navbar toggleable="lg" type="dark" variant="info">
       <b-navbar-brand href="#">AlgeCal</b-navbar-brand>
 
@@ -14,6 +14,7 @@
       </b-collapse>
     </b-navbar>
     <Nuxt />
+
     <!-- Footer -->
     <mdb-footer color="blue" class="font-small pt-4 mt-4">
       <div class="footer-copyright text-center py-3">
@@ -29,7 +30,22 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import { mdbFooter, mdbContainer, mdbRow, mdbCol } from 'mdbvue';
+import VueRouter from 'vue-router'
+import VideoList from '../components/VideoList.vue'
+import LoginForm from '../components/LoginForm.vue'
+/*
+Vue.use(VueRouter)
+const routes = [
+  { path: '/', component: LoginForm }
+]
+const router = new VueRouter({
+  routes // short for `routes: routes`
+})
 
+const app = new Vue({
+  router
+}).$mount('#app')
+*/
 export default {
   components: {
     mdbFooter,
@@ -37,6 +53,7 @@ export default {
     mdbRow,
     mdbCol
   },
+
   data () {
     return {
     };
@@ -107,5 +124,9 @@ html {
 .button--grey:hover {
   color: #fff;
   background-color: #35495e;
+}
+
+.bg-info{
+  background-color: #042f25 !important;
 }
 </style>
