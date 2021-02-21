@@ -1,9 +1,58 @@
 <template>
   <div>
+    <b-navbar toggleable="lg" type="dark" variant="info">
+      <b-navbar-brand href="#">AlgeCal</b-navbar-brand>
+
+      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+
+      <b-collapse id="nav-collapse" is-nav>
+        <b-navbar-nav>
+          <b-nav-item href="/videos">Videos</b-nav-item>
+          <b-nav-item href="/login" v-if="!this.$store.state.isLoggedIn">Login</b-nav-item>
+          <b-nav-item href="#" v-if="this.$store.state.isLoggedIn" v-on:click.prevent="logout">Logout</b-nav-item>
+        </b-navbar-nav>
+      </b-collapse>
+    </b-navbar>
     <Nuxt />
+    <!-- Footer -->
+    <mdb-footer color="blue" class="font-small pt-4 mt-4">
+      <div class="footer-copyright text-center py-3">
+        <mdb-container fluid>
+          &copy; 2020 Copyright
+        </mdb-container>
+      </div>
+    </mdb-footer>
+    <!-- Footer -->
   </div>
 </template>
+<script>
+import Vue from 'vue'
+import Vuex from 'vuex'
+import { mdbFooter, mdbContainer, mdbRow, mdbCol } from 'mdbvue';
 
+export default {
+  components: {
+    mdbFooter,
+    mdbContainer,
+    mdbRow,
+    mdbCol
+  },
+  data () {
+    return {
+    };
+  },
+  created () {
+    Vue.use(Vuex)
+    this.$store.state.isLoggedIn = false;
+  },
+  methods:{
+    logout: function () {
+      this.$store.state.isLoggedIn = false;
+      this.$router.push('login');
+    }
+  }
+}
+</script>
 <style>
 html {
   font-family:

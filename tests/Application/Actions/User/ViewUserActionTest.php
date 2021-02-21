@@ -7,7 +7,7 @@ use App\Application\Actions\ActionError;
 use App\Application\Actions\ActionPayload;
 use App\Application\Handlers\HttpErrorHandler;
 use App\Domain\User\User;
-use App\Domain\User\VideoNotFoundException;
+use App\Domain\User\UserNotFoundException;
 use App\Domain\User\UserRepository;
 use DI\Container;
 use Slim\Middleware\ErrorMiddleware;
@@ -61,7 +61,7 @@ class ViewUserActionTest extends TestCase
         $userRepositoryProphecy = $this->prophesize(UserRepository::class);
         $userRepositoryProphecy
             ->findUserOfId(1)
-            ->willThrow(new VideoNotFoundException())
+            ->willThrow(new UserNotFoundException())
             ->shouldBeCalledOnce();
 
         $container->set(UserRepository::class, $userRepositoryProphecy->reveal());

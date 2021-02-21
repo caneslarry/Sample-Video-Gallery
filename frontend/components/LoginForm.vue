@@ -17,7 +17,7 @@
               required
               placeholder="Enter username"
             ></b-form-input>
-            <div id="username-live-feedback" class="invalid-feedback">The username does not exist. Really we cannot find it.</div>
+            <div id="username-live-feedback" class="invalid-feedback">Sorry, that username is not found.</div>
           </b-form-group>
           <b-button v-on:click.prevent="onSubmit" type="submit" variant="primary">Login to View Videos</b-button>
         </b-form>
@@ -49,6 +49,7 @@ export default {
           for(var i = 0; i < response.data.data.length; i++){
             if(response.data.data[i].username === this.form.username){
               userExists = true;
+              this.$store.state.isLoggedIn = true;
               break;
             }
           }

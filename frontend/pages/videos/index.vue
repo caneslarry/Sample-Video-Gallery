@@ -6,10 +6,19 @@
           <h1>ddddWelcome to Our Video Library</h1>
         </div>
       </div>
+
       <div class="row">
         <div class="col">
-          <b-list-group v-for="video in videos" :key="video.video_id">
-            <b-list-group-item v-on:click="showVideo(video.id)"> {{ video.title }}</b-list-group-item>
+          <select v-model="category">
+            <option value="">-- All --</option>
+            <option value="AlgaeCal">AlgaeCal</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <b-list-group v-for="video in videos" :key="video.id" >
+            <b-list-group-item v-on:click="showVideo(video.id)" v-if="(selectedCategory === '') || (video.category === selectedCategory)">{{video.category}} {{ video.title }}</b-list-group-item>
           </b-list-group>
         </div>
       </div>
@@ -32,11 +41,26 @@ export default {
   name: "VideoList",
   data() {
     var isSelected = false;
+    var category = '';
+    var selectedCategory = '';
     return {
       videos: [],
       currentVideo: [],
-      isSelected
+      isSelected,
+      category,
+      selectedCategory
     };
+  },
+  watch: {
+    'category': function(newVal, oldVal) {
+      this.selectedCategory = newVal;
+    }
+  },
+  beforeMount() {
+    if(!this.$store.state.isLoggedIn)
+    {
+      this.$router.push('login');
+    }
   },
   created () {
     // Get list of videos
