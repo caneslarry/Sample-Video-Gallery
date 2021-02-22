@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div>
-      <b-card>
+      <b-card class="title">
         Welcome To Our Video Library, Please Log In
         <b-form>
           <b-form-group
@@ -19,17 +19,17 @@
             ></b-form-input>
             <div id="username-live-feedback" class="invalid-feedback">Sorry, that username is not found.</div>
           </b-form-group>
-          <b-button v-on:click.prevent="onSubmit" type="submit" variant="primary" disabled>Login to View Videos</b-button>
+          <b-button id="primary-button" v-on:click.prevent="onSubmit" type="submit" variant="primary" disabled>Login to
+            View Videos
+          </b-button>
         </b-form>
       </b-card>
     </div>
   </div>
 </template>
 <script>
-//import { Component } from '@angular/core';
-//import { User } from './user.ts';
-//import { HttpClient } from '@angular/common/http';
 import axios from 'axios';
+
 export default {
   name: "LoginForm",
 
@@ -40,34 +40,38 @@ export default {
       },
     };
   },
-  created () {},
+  created() {
+  },
   methods: {
     validateUsername() {
-      if(this.form.username.length > 3){
-
+      var element = document.getElementById("primary-button");
+      if (this.form.username.length > 2) {
+        element.disabled = false;
+        element.classList.remove("disabled");
+      } else {
+        element.disabled = true;
+        element.classList.add("disabled");
       }
-
     },
-
-    onSubmit(){
+    onSubmit() {
       axios.get('http://localhost:8080/users')
         .then((response) => {
           var userExists = false;
-          for(var i = 0; i < response.data.data.length; i++){
-            if(response.data.data[i].username === this.form.username){
+          for (var i = 0; i < response.data.data.length; i++) {
+            if (response.data.data[i].username === this.form.username) {
               userExists = true;
               this.$store.state.isLoggedIn = true;
               break;
             }
           }
-        if(userExists){
-          //Take to videos
-          this.$router.push('videos');
-        }else{
-          //Show message
-          var element = document.getElementById("username");
-          element.classList.add("is-invalid");
-        }
+          if (userExists) {
+            //Take to videos
+            this.$router.push('videos');
+          } else {
+            //Show message
+            var element = document.getElementById("username");
+            element.classList.add("is-invalid");
+          }
         });
     },
   }
@@ -77,7 +81,6 @@ export default {
 <style>
 .container {
   margin: 0 auto;
-  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -96,7 +99,7 @@ export default {
   sans-serif;
   display: block;
   font-weight: 300;
-  font-size: 100px;
+  font-size: 14px;
   color: #35495e;
   letter-spacing: 1px;
 }
@@ -112,15 +115,18 @@ export default {
 .links {
   padding-top: 15px;
 }
-.btn-primary{
+
+.btn-primary {
   background-color: #042E24;
   border-color: #042E24;
 }
-.btn-primary:hover{
+
+.btn-primary:hover {
   background-color: #042E24;
   border-color: #042E24;
 }
-.btn-primary.disabled, .btn-primary:disabled{
+
+.btn-primary.disabled, .btn-primary:disabled {
   background-color: #042E24;
   border-color: #042E24;
 }

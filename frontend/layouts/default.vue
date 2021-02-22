@@ -71,6 +71,11 @@ export default {
 }
 </script>
 <style>
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed');
+
+html, body, div, p {
+  font-family: 'Roboto', sans-serif;
+}
 html {
   font-family:
     'Source Sans Pro',

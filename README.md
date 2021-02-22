@@ -85,7 +85,7 @@ api. The video endpoint should return this JSON:
 link to an individual video playing page, `/videos/{video_id}` that has a single player and
 description of the video on it.
 
-* Video thumbnails can be retrieved using the video_id along with the [Wistia video api](https://wistia.com/support/developers/data-api#medias_show)
+* Video thumbnails can be retrieved using the video_id along with the [Wistia vi deo api](https://wistia.com/support/developers/data-api#medias_show)
 
 ## Layout
 * Nav Bar
