@@ -19,7 +19,7 @@
     <mdb-footer color="blue" class="font-small pt-4 mt-4">
       <div class="footer-copyright text-center py-3">
         <mdb-container fluid>
-          &copy; 2020 Copyright
+          &copy; {{ new Date().getFullYear() }} Larry Hussey
         </mdb-container>
       </div>
     </mdb-footer>
