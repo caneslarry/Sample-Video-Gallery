@@ -27,25 +27,8 @@
   </div>
 </template>
 <script>
-import Vue from 'vue'
-import Vuex from 'vuex'
 import { mdbFooter, mdbContainer, mdbRow, mdbCol } from 'mdbvue';
-import VueRouter from 'vue-router'
-import VideoList from '../components/VideoList.vue'
-import LoginForm from '../components/LoginForm.vue'
-/*
-Vue.use(VueRouter)
-const routes = [
-  { path: '/', component: LoginForm }
-]
-const router = new VueRouter({
-  routes // short for `routes: routes`
-})
 
-const app = new Vue({
-  router
-}).$mount('#app')
-*/
 export default {
   components: {
     mdbFooter,
@@ -59,7 +42,6 @@ export default {
     };
   },
   created () {
-    Vue.use(Vuex)
     this.$store.state.isLoggedIn = false;
   },
   methods:{
